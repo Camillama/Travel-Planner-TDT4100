@@ -1,86 +1,146 @@
-# Skjelettprosjekt for TDT4100 prosjekt V2023
+# Travel Planner - Reiseplanlegger
+## 📋 Prosjektoversikt
+Dette er et objektorientert Java-prosjekt utviklet som del av TDT4100-kurset våren 2023. Applikasjonen lar brukere søke etter tilgjengelige reiser basert på avreisested, destinasjon og transportmiddel, samt booke disse reisene.
 
-Dette repoet er et skjelettprosjekt for TDT4100 prosjektet våren 2023.
+### Hovedfunksjonalitet
+- 🔍 Søke etter tilgjengelige reiser
+- ✈️ Støtte for flere transportmidler (fly, bil, båt)
+- 💺 Håndtering av kapasitet og booking
+- 💰 Dynamisk prisberegning basert på destinasjon og transportmiddel
+- 💾 Persistent datalagring med filhåndtering
 
-Vi har opprettet et eksempelprosjekt her, som ment for at dere skal kunne komme raskt igang med deres eget prosjekt.
+## 🏗️ Arkitektur og Modell
 
-## TL;DR
+Prosjektet følger Model-View-Controller (MVC) arkitekturen, og er strukturert som følger:
 
-Lag en ny mappe i `src/main/java/` som er deres prosjekt. Opprett en startsfil for appen, slik som [ExampleProjectApp.java](src/main/java/exampleproject/ExampleProjectApp.java) og en kontroller som [ExampleProjectController.java](src/main/java/exampleproject/ExampleProjectController.java) i denne nye mappen. Lag så en mappe i `src/main/resources` med samme navn som prosjektet deres og et view som [App.fxml](src/main/resources/exampleproject/App.fxml) i denne nye mappen.
+### Modellklasser
+- **`Vehicle`**: Representerer et transportmiddel med avreise, destinasjon, type og kapasitet
+- **`Hub`**: Hovedklasse som håndterer søk, booking og administrasjon av alle kjøretøy
+- **`Filehandler`**: Ansvarlig for lesing og skriving av data til/fra filer
 
-**Eventuelt**: Endre navn på filer og mapper fra "ExampleProject" til deres prosjektnavn.
+### View og Controller
+- **`BookingApp`**: JavaFX-applikasjonen som starter brukergrensesnittet
+- **`BookingController`**: Controller som kobler brukergrensesnitt med forretningslogikk
+- **`Booking.fxml`**: FXML-fil som definerer brukergrensesnittets layout
 
-## Litt rask info
+## 🧪 Testing og Kvalitetssikring
+Prosjektet inkluderer brukertester for å sikre korrekt funksjonalitet:
 
-Allerede nå er det mulig å kjøre filen [ExampleProjectApp.java](src/main/java/exampleproject/ExampleProjectApp.java) i VSCode for å få opp en liten kalkulator-app.
+### Implementerte tester
+- **`CheckValidInput`**: Validerer brukerinput og håndtering av ugyldig data
+- **`GetRelevantVehiclesTest`**: Tester søkefunksjonalitet for å finne relevante reiser
+- **`CheckReduceCapacity`**: Verifiserer at kapasitet reduseres korrekt ved booking
+- **`checkGetPrice`**: Tester logikken bak priskalkulering
 
-Denne filen er "startsfilen" til applikasjonen. Her settes tittel på appen, hvilken FXML-fil som skal brukes, og den er ansvarlig for å starte selve applikasjonen:
+### Testdekning
+Testene dekker følgende områder:
+- ✅ Input-validering og feilhåndtering
+- ✅ Søkelogikk og filtrering
+- ✅ Booking og kapasitetshåndtering
+- ✅ Prisberegning basert på ulike kriterier
+- ✅ Filhåndtering og datapersistens
 
-```java
-primaryStage.setTitle("Example App"); // Setter tittel på vinduet
-primaryStage.setScene(new Scene(FXMLLoader.load(getClass().getResource("App.fxml")))); // Sier at appen skal bruke "App.fxml"
-primaryStage.show(); // Viser vinduet
+### Kjøring av tester
+Testene ligger i `src/test/java/myProject/` og kan kjøres individuelt eller samlet.
+
+## 💡 Nøkkelfunksjoner
+
+### Intelligent prisberegning
+Prosjektet inkluderer også logikk for enkel prisberegning, som kan justeres etter ved behov. Jeg har valgt å implementere en lett kalkuleringsmodell for simplisitet.
+- Basispris varierer med transportmiddel (Fly: 3x, Båt: 2x, Bil: 1x)
+- Geografisk prising: Dyrere byer (London, New York, Los Angeles) gir 50% påslag
+- Billigere byer (Trondheim, Oslo, Bergen) gir 20% rabatt
+- Lav kapasitet (under 10 plasser) gir 20% rabatt
+
+### Robust søkefunksjonalitet
+- Fleksibel søking: Kun avreise, kun destinasjon, eller begge
+- Case-insensitive søk med trimming av mellomrom
+- Filtrering på transportmiddel
+- Detaljert feilhåndtering med informative meldinger
+
+### Dynamisk booking
+- Automatisk kapasitetsreduksjon ved booking
+- Kjøretøy fjernes når kapasitet når null
+- Persistent lagring av endringer
+
+## 📁 Prosjektstruktur
+
+```
+Travel-Planner-TDT4100/
+│
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   ├── module-info.java
+│   │   │   ├── exampleproject/          # Eksempelprosjekt (kan fjernes)
+│   │   │   └── myProject/               # Hovedprosjekt
+│   │   │       ├── BookingApp.java      # JavaFX-applikasjon (Main)
+│   │   │       ├── BookingController.java # Controller for GUI
+│   │   │       ├── Hub.java             # Hovedforretningslogikk
+│   │   │       ├── Vehicle.java         # Modellklasse for kjøretøy
+│   │   │       └── Filehandler.java     # Filhåndtering
+│   │   └── resources/
+│   │       └── myProject/
+│   │           ├── Booking.fxml         # GUI-layout
+│   │           ├── images/
+│   │           └── saves/
+│   │               └── trips.txt        # Datalagrings
+│   │
+│   └── test/
+│       └── java/
+│           └── myProject/               # Brukertester
+│               ├── CheckValidInput.java
+│               ├── GetRelevantVehiclesTest.java
+│               ├── CheckReduceCapacity.java
+│               └── checkGetPrice.java
+│
+├── target/                             # Kompilerte filer (Maven)
+├── pom.xml                            # Maven-konfigurasjon
+└── README.md                          # Dette dokumentet
 ```
 
-Kontrolleren til applikasjonen er [ExampleProjectController.java](src/main/java/exampleproject/ExampleProjectController.java). Denne filen er "bindeleddet" mellom FXML-filen(e) og klassen(e) som skal brukes i applikasjonen. I dette eksempelprosjektet har den to metoder: `initCalculator` og `handleButtonClick`. I tillegg har den noen felter som er annotert med `@FXML`. Dette viser at de tilhører [FXML-filen](src/main/resources/exampleproject/App.fxml) vår. Her er navnet på variablene viktige. F.eks er `private Label result` på linje 12 bundet til `Label`-feltet på linje 15 i [FXML-filen](src/main/resources/exampleproject/App.fxml), siden denne har en `fx:id = "result"` og variabelen vår heter `result`:
+## 🔧 Tekniske detaljer
 
-```java
-@FXML
-private Label result; // Fra ExampleProjectApp.java
+### Objektorienterte prinsipper
+- **Innkapsling**: Private felter med public getter-metoder
+- **Arv og interface**: `Vehicle` implementerer `Comparable<Vehicle>`
+- **Polymorfisme**: Behandling av ulike kjøretøytyper via samme interface
+- **Abstraksjon**: Klar separasjon mellom model, view og controller
 
-<Label fx:id="result" layoutX="257.0" layoutY="244.0" /> // Fra App.fxml
-```
+### Designmønstre
+- **MVC (Model-View-Controller)**: Klar separasjon av ansvar
+- **Singleton-lignende**: Hub-klassen fungerer som sentral koordinator
+- **Strategy pattern**: Ulik prisberegning basert på kjøretøytype
 
-Noe liknende skjer med metoden `handleButtonClick`, som også er annotert med `@FXML`. Dette gjøres slik at vi "får tak i" denne metoden fra [FXML-filen](src/main/resources/exampleproject/App.fxml). `Button`-feltet i [FXML-filen](src/main/resources/exampleproject/App.fxml) har en `onAction="#handleButtonClick"`, som vil si at metoden `handleButtonClick`, som er annotert med `@FXML`, blir kjørt når vi trykker på knappen:
+### Feilhåndtering
+- Validering av brukerinput med informative feilmeldinger
+- `IllegalArgumentException` for ugyldige parametere
+- `IllegalStateException` for forretningslogikk-feil
 
-```xml
-<Button layoutX="271.0" layoutY="188.0" mnemonicParsing="false" onAction="#handleButtonClick" text="Kalkuler" /> <!-- Fra App.fxml -->
-```
+### Mulige forbedringer
+- Grafisk tidslinje for reiser
+- Brukerkonti og booking-historikk  
+- Integrasjon med eksterne API-er for sanntidsdata
+- Database-integrasjon (PostgreSQL/MySQL)
+- Avansert søkefunksjonalitet med filtre og sortering
 
-Det som gjør at [kontrolleren](src/main/java/exampleproject/ExampleProjectController.java) og [FXML-filen](src/main/resources/exampleproject/App.fxml) er koblet sammen er attributten `fx:controller='exampleproject.ExampleProjectController'` på det aller ytterste elementet i [FXML-filen](src/main/resources/exampleproject/App.fxml).
+### Kjente begrensninger
+- Begrenset til forhåndsdefinerte ruter
+- Ingen sanntids oppdatering av tilgjengelighet
+- Enkel filbasert lagring
 
-```xml
-<AnchorPane fx:id="background" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="exampleproject.ExampleProjectController"> <!-- Fra App.fxml -->
-```
+## 📚 Læringsutbytte
 
-Så, når vi trykker på knappen i appen blir som sagt metoden `handleButtonClick` kjørt. Det som skjer inne i denne metoden er først at vi oppretter en ny [kalkulator](src/main/java/exampleproject/Calculator.java). Ved opprettelse av en kalkulator trenger vi en `operator`. Denne henter vi ut fra hva en bruker av appen har skrevet inn i `TextField`-feltet med `fx:id="operator"`. Siden vi allerede har opprettet en variabel `private TextField operator`, som er annortert med `@FXML`, er denne allere linket til dette `TextField`-feltet, og vi kan hente ut teksten som er skrevet inn med `operator.getText()`.
+Dette prosjektet demonstrerer følgende TDT4100-konsepter:
+- Objektorientert programmering i Java
+- JavaFX for grafiske brukergrensesnitt
+- Filhåndtering og datapersistens
+- Unittesting og kvalitetssikring
+- MVC-arkitekturmønster
+- Håndtering av exceptions og feilsituasjoner
 
-```java
-initCalculator(operator.getText()); // Kaller på initCalculator som oppretter en ny kalkulator. Operator.getText() henter ut teksten som er skrevet inn i `operator`-feltet.
-```
+---
 
-Det samme gjelder nedover i metoden; vi henter ut verdier fra `firstNumber` og `secondNumber`. Det som er verdt å merke seg her er at de blir hentet ut som `String`s, men kalkulatoren vår krever `int`s. Derfor gjør vi de også om til integers. Her bør man og være litt forsiktige, da det ikke er gitt at brukere skriver inn gyldige tall. Derfor har vi wrappet dette inn i en `try/catch`, som sier ifra dersom tallet er ugyldig.
-
-I tillegg til alt dette er det laget en liten [eksempel testfil](src/test/java/exampleproject/CalculatorTest.java). Ingenting spennende som skjer her, det er en test for konstruktøren til [kalkulator klassen vår](src/main/java/exampleproject/Calculator.java), samt en test for metoden `calculate` den har. Alle tester dere skriver til klassene deres legges altså inn i mappen `src/test/java/<deres_prosjekt>`.
-
-## For å komme i gang med deres eget prosjekt
-
-1. Inviter gruppemedlemmene dine til dette repoet, og gi de minst en `Developer`-rolle (helst `Maintainer`)
-2. Klon dette prosjektet et sted på maskinen deres (ikke inne i Students-mappen, men gjerne i samme mappe denne ligger i).
-    - Dersom du har aktivert 2FA på GitLab-kontoen din og blir bedt om innlogging ved kloning/pushing av/til repoet må du opprette en [personal access token](https://gitlab.stud.idi.ntnu.no/-/profile/personal_access_tokens) som har "read_repository" og "write_repository"-rettigheter. Deretter kan du logge inn med ditt feidebrukernavn som brukernavn og denne tokenen som blir laget til deg som passord. En guide for hvordan opprette personal access token finnes [her](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html#create-a-personal-access-token).
-3. Lag en ny mappe i `src/main/java/` som er deres prosjekt.
-4. Opprett en startsfil for appen deres, slik som [ExampleProjectApp.java](src/main/java/exampleproject/ExampleProjectApp.java) og en kontroller som [ExampleProjectController.java](src/main/java/exampleproject/ExampleProjectController.java) i deres nye prosjekt-mappe.
-5. Opprett en ny mappe i `src/main/resources/` som er deres prosjekt.
-6. Opprett en FXML-fil, slik som [App.fxml](src/main/resources/exampleproject/App.fxml) i deres nye prosjekt-mappe i `src/main/resources/`.
-7. **HUSK** å legge inn `fx:controller='<deres_prosjekt>.<deres_kontroller>'` på det aller ytterste elementet i den nye FXML-filen deres, ellers vil ikke appen starte.
-
-**Eventuelt**: Endre navn på filer og mapper fra "ExampleProject" til deres prosjektnavn.
-
-## Reminder av nøkkelpunkter
-
-| Nøkkelpunkt                              | Beskrivelse                             |
-| ---------------------------------------- | --------------------------------------- |
-| Innleveringsfrist                        | 14. april                               |
-| Demonstrasjonsfrist hos læringsassistent | 21. mai                                 |
-| Gruppestørrelse                          | 1 eller 2 personer                      |
-
-### Anbefalte perioder å jobbe med prosjektet
-
-| Uke   | Fra  | Til  | Beskrivelse                                 |
-| ----- | ---- | ---- | ------------------------------------------- |
-| 12    | 20/3 | 24/2 | Grunnklasser og brukergrensesnitt           |
-| 13    | 27/3 | 31/3 | Lagring of filhåndtering                    |
-| 14    |      |      | Påske                                       |
-| 15    | 10/4 | 14/4 | Fullføre appen med tilhørende dokumentasjon |
-
-**_LYKKE TIL_**
+**Kursinfo**: TDT4100 - Objektorientert programmering  
+**Semester**: Vår 2023  
+**Institusjon**: Norges teknisk-naturvitenskapelige universitet (NTNU)
