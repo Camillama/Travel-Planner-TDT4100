@@ -1,0 +1,79 @@
+Bergen,Oslo,Plane,12
+Oslo,Bergen,Plane,12
+Bergen,Trondheim,Plane,10
+Trondheim,Bergen,Plane,10
+Oslo,Trondheim,Plane,15
+Trondheim,Oslo,Plane,12
+Trondheim,Oslo,Plane,15
+Bergen,Haugesund,Car,4
+Haugesund,Bergen,Car,4
+Kristiansand,Oslo,Car,4
+Oslo,Kristiansand,Car,4
+Oslo,Bergen,Car,4
+Bergen,Oslo,Car,4
+Bergen,Stavanger,Boat,50
+Stavanger,Bergen,Boat,50
+Bergen,Haugesund,Boat,30
+Haugesund,Bergen,Boat,30
+New York,Washington D.C.,Plane,120
+Washington D.C.,New York,Plane,130
+New York,Los Angeles,Car,5
+Los Angeles,New York,Car,5
+Los Angeles,San Francisco,Car,3
+San Francisco,Los Angeles,Car,4
+London,Paris,Plane,139
+Paris,London,Plane,130
+London,Manchester,Car,2
+Manchester,London,Car,4
+Paris,Nice,Plane,120
+Nice,Paris,Plane,110
+Paris,Lyon,Car,2
+Lyon,Paris,Car,3
+Sydney,Melbourne,Plane,140
+Melbourne,Sydney,Plane,130
+Sydney,Brisbane,Car,4
+Brisbane,Sydney,Car,5
+Melbourne,Adelaide,Car,2
+Adelaide,Melbourne,Car,3
+Brisbane,Gold Coast,Car,1
+Gold Coast,Brisbane,Car,2
+New York,Chicago,Plane,130
+Chicago,New York,Plane,120
+San Francisco,Las Vegas,Car,4
+Las Vegas,San Francisco,Car,4
+Sydney,Perth,Plane,150
+Perth,Sydney,Plane,140
+London,Edinburgh,Car,2
+Edinburgh,London,Car,4
+Paris,Marseille,Plane,100
+Marseille,Paris,Plane,110
+Amsterdam,Berlin,Plane,120
+Berlin,Amsterdam,Plane,110
+Tokyo,Osaka,Plane,140
+Osaka,Tokyo,Plane,130
+Beijing,Shanghai,Plane,100
+Shanghai,Beijing,Plane,110
+Los Angeles,San Diego,Car,2
+San Diego,Los Angeles,Car,2
+Sydney,Canberra,Car,2
+Canberra,Sydney,Car,3
+Miami,Orlando,Car,1
+Orlando,Miami,Car,2
+Barcelona,Madrid,Plane,100
+Madrid,Barcelona,Plane,110
+Rome,Milan,Car,3
+Milan,Rome,Car,4
+Cape Town,Johannesburg,Plane,4
+Johannesburg,Cape Town,Plane,5
+Sydney,Hobart,Plane,1
+Hobart,Sydney,Plane,2
+New York,Boston,Car,1
+Boston,New York,Car,2
+Shanghai,Hong Kong,Plane,120
+Hong Kong,Shanghai,Plane,130
+London,Paris,Boat,3
+Paris,London,Boat,5
+New York,Miami,Boat,5
+Miami,New York,Boat,5
+Sydney,Auckland,Boat,3
+Auckland,Sydney,Boat,4
